@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohommed Shainiya | Data Science Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+<style>
+/* 1. Global behavior first */
+html {
+  scroll-behavior: smooth;
+}
+
+/* --- BASE VARIABLES & RESET --- */
+:root {
+  --bg-main: #021a1a;        /* Deep dark green/teal background */
+  --bg-card: #062828;        /* Slightly lighter card background */
+  --bg-card-hover: #0a3838;
+  --accent-primary: #12b8a6; /* Bright teal accent */
+  --accent-hover: #0d9488;
+  --text-main: #ffffff;
+  --text-muted: #94a3b8;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(6, 40, 40, 0.6);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; height: auto; display: block; border-radius: 16px; }
+a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+ul { list-style: none; }
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* --- TYPOGRAPHY & BUTTONS --- */
+h1, h2, h3, h4 { line-height: 1.2; font-weight: 700; }
+.section-title {
+  text-align: center;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin-bottom: 1rem;
+}
+.section-title span { color: var(--accent-primary); }
+.section-subtitle {
+  text-align: center;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto 4rem auto;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.8rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: #000;
+}
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(18, 184, 166, 0.2);
+}
+.btn-outline {
+  background-color: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--border-color);
+}
+.btn-outline:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* --- NAVIGATION --- */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 1.5rem 0;
+  background: rgba(2, 26, 26, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+}
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.5px; }
+.logo span { color: var(--accent-primary); }
+.nav-links { display: flex; gap: 2.5rem; align-items: center; }
+.nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--text-muted); }
+.nav-links a:hover { color: var(--text-main); }
+
+/* --- HERO SECTION --- */
+.hero {
+  padding: 180px 0 100px;
+  position: relative;
+  background: radial-gradient(circle at 80% 30%, rgba(18, 184, 166, 0.1) 0%, transparent 40%);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.hero-content h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  margin-bottom: 1.5rem;
+}
+.hero-content p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+  margin-bottom: 2.5rem;
+  max-width: 500px;
+}
+/* Controlled Hero Image Size */
+.hero-image-wrapper {
+  position: relative;
+  max-width: 500px; /* Limits the width so it doesn't get too large */
+  margin: 0 auto;   /* Centers it on smaller screens */
+}
+
+.hero-image-wrapper img {
+  width: 100%;
+  height: 550px;    /* Fixed height for a sleek vertical look */
+  object-fit: cover; /* Crops the image perfectly to fill the area */
+  border-radius: 24px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* Adjust the floating badge to stay proportional */
+.floating-badge {
+  position: absolute;
+  bottom: 20px;
+  left: -30px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 10;
+}
+.badge-icon {
+  width: 40px; height: 40px;
+  background: rgba(18, 184, 166, 0.2);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-primary);
+  font-size: 1.2rem;
+}
+
+/* --- ABOUT SECTION --- */
+.about { padding: 100px 0; }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: center;
+}
+.about-text h2 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+.about-text p { color: var(--text-muted); margin-bottom: 1.5rem; }
+.about-stats {
+  display: flex; gap: 2rem; margin-top: 2rem;
+  padding-top: 2rem; border-top: 1px solid var(--border-color);
+}
+.stat-item h4 { font-size: 2rem; color: var(--accent-primary); }
+.stat-item p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+
+/* --- SERVICES (Green Cards Layout) --- */
+.services { padding: 100px 0; background: var(--bg-card); }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+.service-card {
+  background: rgba(18, 184, 166, 0.05);
+  border: 1px solid rgba(18, 184, 166, 0.1);
+  padding: 2.5rem;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+.service-card:hover {
+  background: rgba(18, 184, 166, 0.1);
+  transform: translateY(-5px);
+}
+.service-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--accent-primary);
+}
+.service-card h3 { margin-bottom: 1rem; font-size: 1.3rem; }
+.service-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+/* --- PROJECTS (Video-style layout) --- */
+.projects { padding: 100px 0; }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+.project-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  group: hover;
+  cursor: pointer;
+}
+.project-card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.project-card:hover img { transform: scale(1.05); }
+.project-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(2, 26, 26, 0.9) 0%, rgba(2, 26, 26, 0.2) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem;
+}
+.project-overlay h3 { margin-bottom: 0.5rem; }
+.project-overlay p { color: var(--text-muted); font-size: 0.9rem; }
+.play-btn {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px; height: 60px;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,0.2);
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.project-card:hover .play-btn { opacity: 1; }
+
+/* --- CONTACT CTA BANNER --- */
+.contact-banner {
+  margin: 100px 0;
+}
+.banner-inner {
+  background: linear-gradient(135deg, var(--bg-card) 0%, rgba(18, 184, 166, 0.1) 100%);
+  border-radius: 24px;
+  padding: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  border: 1px solid var(--border-color);
+  gap: 3rem;
+}
+.banner-text h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+.banner-text p { color: var(--text-muted); margin-bottom: 2rem; }
+.contact-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.contact-inputs input, .contact-inputs textarea {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: rgba(0,0,0,0.2);
+  color: white;
+  font-family: inherit;
+}
+.contact-inputs input:focus, .contact-inputs textarea:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+}
+
+/* --- FOOTER --- */
+footer {
+  border-top: 1px solid var(--border-color);
+  padding: 3rem 0;
+  text-align: center;
+}
+.footer-logo {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: rgba(255,255,255,0.1); /* Watermark style */
+  letter-spacing: 5px;
+  margin-top: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-grid, .about-grid, .banner-inner { grid-template-columns: 1fr; }
+  .floating-badge { left: 10px; bottom: 10px; right: 10px; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .nav-links { display: none; } /* Simplified for mobile */
+}
+</style>
+</head>
+<body>
+
+<nav data-aos="fade-down">
+  <div class="container nav-inner">
+    <a href="#" class="logo">M.Shainiya.</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Capabilities</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact" class="btn btn-outline" style="padding: 0.5rem 1.5rem;">Contact Me</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
+<p style="font-size: 1.25rem; color: var(--text-main); font-weight: 500; margin-bottom: 1rem;">
+        Hi, I'm
+      </p>
+      <h1 style="font-size: clamp(3rem, 6vw, 5rem); background: linear-gradient(to right, #12b8a6, #5eead4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem;">
+        Mohommed Shainiya
+      </h1>
+      
+      <p style="font-size: 1.25rem; color: var(--text-main); font-weight: 500; margin-bottom: 1rem;">
+        "Turning Data into Decisions That Matter"
+      </p>
+      
+      <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2.5rem; max-width: 550px;">
+        Undergraduate in Applied Data Science Communication. Bridging the gap between financial literacy and modern analytics. I specialize in turning raw numbers into clear, data-driven narratives that lead to smarter business decisions.
+      </p>
+      
+<div style="display: flex; gap: 1rem;">
+  <a href="#about" class="btn btn-primary">Get to Know Me</a>
+  
+  <!-- Point to the file within your project folder -->
+  <a href="assets/Shainiyas_new_CV.pdf" download="Mohommed_Shainiya_CV" class="btn btn-outline">
+    Download My CV
+  </a>         
+</div>
+    
+    <div class="hero-image-wrapper" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+      <img src="C:/Users/Shainiya/Downloads/New image.jpeg" alt="Mohommed Shainiya">
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="container about-grid">
+    <div class="about-image" data-aos="fade-right">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" alt="Data Analytics">
+    </div>
+    <div class="about-text" data-aos="fade-left">
+      <div style="color: var(--accent-primary); font-weight: 600; margin-bottom: 1rem; letter-spacing: 2px;">ABOUT ME</div>
+      <p>My journey began in the field of finance and accounting, where I built a strong foundation as an AAT finalist while pursuing the CA Sri Lanka qualification. Through this experience, I developed a solid understanding of financial statements, business processes, and decision-making. This background helps me today to see data not just as numbers, but as meaningful insights that reflect real business performance.</p>
+      <p>I am currently studying Applied Data Science Communication at General Sir John Kotelawala Defence University, where I am expanding my skills in data analysis, predictive modeling, machine learning, and data visualization using tools like Power BI and Python. My goal is to combine my financial knowledge with data science to create clear, practical insights that help organizations make better decisions and improve performance.</p>
+      <div class="about-stats">
+        <div class="stat-item">
+          <h4>4+</h4>
+          <p>Years in Finance</p>
+        </div>
+        <div class="stat-item">
+          <h4>2+</h4>
+          <p>Years in Data Science</p>
+        </div>
+<div class="stat-item">
+          <h4>5+</h4>
+          <p>Data Projects</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="Capabilities" id="services">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">My <span>Capabilities</span></h2>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">End-to-end data solutions from raw data wrangling to actionable executive insights.</p>
+    
+    <div class="services-grid">
+      <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="service-icon">📈</div>
+        <h3>Data Analytics & Insights</h3>
+        <p>End-to-end analysis pipelines using Python and SQL. From raw data to actionable insight with a communicator's eye.</p>
+      </div>
+      
+      <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="service-icon">📊</div>
+        <h3>Power BI Dashboards</h3>
+        <p>Designing interactive, executive-grade dashboards that connect to live data and translate complex KPIs.</p>
+      </div>
+      
+      <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="service-icon">🤖</div>
+        <h3>Machine Learning</h3>
+        <p>Applying classification, regression, and time series models to real-world problems. From selection to output.</p>
+      </div>
+      
+     <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+  <div class="service-icon">📊</div>
+  <h3>Data Visualization</h3>
+  <p>Making clear charts and graphs. Telling the story behind your data so it is easy to understand.</p>
+</div>
+
+<div class="service-card" data-aos="fade-up" data-aos-delay="500">
+  <div class="service-icon">📂</div>
+  <h3>SAP & Business Systems</h3>
+  <p>Experienced in using SAP for data management and business workflows. Helped keep financial records organized and technical reporting accurate.</p>
+</div>
+
+<div class="service-card" data-aos="fade-up" data-aos-delay="600">
+  <div class="service-icon">💻</div>
+  <h3>ICT Operations</h3>
+  <p>Skilled in basic software solutions, system maintenance, and general computer hardware and software support.</p>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">Latest <span>Projects</span></h2>
+    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Explore my recent analytical models and interactive dashboards.</p>
+    
+    <div class="projects-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+      
+      <!-- Project 01: Global SDG Analysis -->
+<div class="project-card" data-aos="fade-up" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; overflow: hidden; display: flex; flex-direction: column;">
+  
+  <!-- Image Area (Use a screenshot of your SDG charts here) -->
+  <div class="C:/Users/Shainiya/Downloads/Gemini_Generated_Image_ptztzdptztzdptzt.png" style="height: 200px; background: url('C:/Users/Shainiya/Downloads/Gemini_Generated_Image_ptztzdptztzdptzt.png') center/cover; position: relative;">
+    <div style="position: absolute; top: 15px; right: 15px; background: #1abc9c; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">
+      Python & Data Analysis
+    </div>
+  </div>
+  
+  <!-- Content Area -->
+  <div class="project-info" style="padding: 20px; flex-grow: 1;">
+    <h3 style="color: white; margin-bottom: 10px;">Global SDG Analysis</h3>
+    <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 20px; line-height: 1.5;">
+      A comprehensive look at Sustainable Development Goals worldwide. Using Python to visualize progress and identify gaps in global development.
+    </p>
+    
+    <!-- GitHub Button - Styled like your requested image -->
+    <a href="https://github.com/Shyy-04/Global-SDG-Analysis" target="_blank" style="display: block; background: #1abc9c; color: #0b4d42; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: bold; text-align: center; transition: 0.3s;">
+      View on GitHub
+    </a>
+  </div>
+</div>
+
+<!-- Project 02: Policy AI System -->
+<div class="project-card" data-aos="fade-up" data-aos-delay="100" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; overflow: hidden; display: flex; flex-direction: column;">
+  
+  <!-- Image Area -->
+  <div class="project-img" style="height: 200px; background: url('https://github.com/Shyy-04/policy-ai-system/blob/main/interface.png?raw=true') center/cover; position: relative;">
+    <div style="position: absolute; top: 15px; right: 15px; background: #1abc9c; color: #0b4d42; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">
+      AI & Automation
+    </div>
+  </div>
+  
+  <!-- Content Area -->
+  <div class="project-info" style="padding: 20px; flex-grow: 1;">
+    <h3 style="color: white; margin-bottom: 10px;">Policy AI System</h3>
+    <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 20px; line-height: 1.5;">
+      An intelligent system designed to analyze and automate policy-driven workflows. It helps simplify complex rules into clear, actionable steps.
+    </p>
+    
+    <a href="https://github.com/Shyy-04/policy-ai-system" target="_blank" style="display: block; background: #1abc9c; color: #0b4d42; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: bold; text-align: center; transition: 0.3s;">
+      View on GitHub
+    </a>
+  </div>
+</div>
+
+<!-- Project 03: Heart Disease Interpretability -->
+<div class="project-card" data-aos="fade-up" data-aos-delay="200" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s;">
+  
+  <!-- Image Area (Use a screenshot of your SDG charts here) -->
+  <div class="C:/Users/Shainiya/Downloads/Gemini_Generated_Image_pjvglkpjvglkpjvg.png" style="height: 200px; background: url('C:/Users/Shainiya/Downloads/Gemini_Generated_Image_pjvglkpjvglkpjvg.png') center/cover; position: relative;">
+    <div style="position: absolute; top: 15px; right: 15px; background: #1abc9c; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">
+      Python & Data Analysis
+    </div>
+  </div>
+  
+  <!-- Content Area -->
+  <div class="project-info" style="padding: 20px; flex-grow: 1;">
+    <h3 style="color: white; margin-bottom: 10px;">Heart Disease Interpretability</h3>
+    <p style="font-size: 0.9rem; color: #ccc; margin-bottom: 20px; line-height: 1.5;">
+      Decoding AI predictions using SHAP values. This project highlights model transparency by identifying the specific health factors that drive high-risk heart disease classifications.
+    </p>
+    
+    <!-- GitHub Button -->
+    <a href="https://github.com/Shyy-04/heart-disease-interpretability-shap" target="_blank" style="display: block; background: #1abc9c; color: #0b4d42; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: bold; text-align: center; transition: 0.3s;">
+      View on GitHub
+    </a>
+  </div>
+</div>
+   
+      <!-- Link to Main GitHub -->
+      <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="project-content" style="border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 15px; background: rgba(255,255,255,0.05); text-align: center;">
+          <h3>More on GitHub</h3>
+          <p>Check out my latest repositories and code contributions.</p>
+          <a href="https://github.com/Shyy-04" target="_blank" class="btn btn-primary" style="display: inline-block; padding: 0.5rem 1rem; border-radius: 10px;">Visit Profile</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="contact-banner" id="contact">
+  <div class="container">
+    <div class="banner-inner" data-aos="zoom-in" data-aos-duration="1000">
+      <div class="banner-text">
+        <div style="background: rgba(255,255,255,0.1); display: inline-block; padding: 0.5rem 1rem; border-radius: 30px; margin-bottom: 1rem; font-size: 0.85rem;">✉️ Available for work</div>
+        <h2>Need more <span>help?</span></h2>
+        <p>Whether you're looking for a data analyst or someone who can translate financial data into stories — I'd love to connect.</p>
+        
+        <p>
+          <strong>Phone:</strong> +94 74 114 5565<br>
+          <strong>Email:</strong> mshainiya2004@gmail.com
+        </p>
+
+        <div class="social-links" style="margin-top: 1.5rem;">
+          <p style="margin-bottom: 0.5rem; font-weight: bold;">Follow my work:</p>
+          <a href="https://www.linkedin.com/in/shainiya-mohommed-672122343/" target="_blank" style="color: white; margin-right: 15px; text-decoration: none; font-size: 1.2rem;">🔗 LinkedIn</a>
+          <a href="https://github.com/Shyy-04" target="_blank" style="color: white; text-decoration: none; font-size: 1.2rem;">💻 GitHub</a>
+        </div>
+      </div>
+
+      <div class="contact-inputs">
+  <!-- The Form -->
+<form id="my-form" action="https://formspree.io/f/xvzlodjj" method="POST" class="contact-inputs">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="email" placeholder="Your Email" required>
+  <textarea name="message" rows="4" placeholder="How can I help you?" required></textarea>
+  <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; border-radius: 12px;">Send Message</button>
+  
+  <!-- Success Message (Hidden by default) -->
+  <p id="form-status" style="display:none; color: #2ecc71; margin-top: 1rem; font-weight: bold; text-align: center;">
+    Your message has been sent!
+  </p>
+</form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p style="color: var(--text-muted); font-size: 0.9rem;">© 2026 Mohommed Shainiya. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  // Initialize animations
+  AOS.init({
+	// This ensures animations repeat every time the element enters the view
+once: false,      
+    
+  // This tells AOS to animate elements out as you scroll past them 
+  // and animate them back in when you scroll back up
+    mirror: true,
+    offset: 50,      // offset (in px) from the original trigger point
+    duration: 800,    // values from 0 to 3000, with step 50ms
+      });
+</script>
+
+<script>
+  var form = document.getElementById("my-form");
+  
+  async function handleSubmit(event) {
+    event.preventDefault();
+    var status = document.getElementById("form-status");
+    var data = new FormData(event.target);
+    
+    fetch(event.target.action, {
+      method: form.method,
+      body: data,
+      headers: {
+          'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        status.style.display = "block"; // Show the success message
+        form.reset(); // Clear the form rows
+      } else {
+        status.innerHTML = "Oops! There was a problem.";
+        status.style.color = "red";
+        status.style.display = "block";
+      }
+    }).catch(error => {
+      status.innerHTML = "Oops! There was a problem.";
+      status.style.color = "red";
+      status.style.display = "block";
+    });
+  }
+  
+  form.addEventListener("submit", handleSubmit)
+</script>
+
+
+</body>
+</html>
