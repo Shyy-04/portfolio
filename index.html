@@ -348,8 +348,9 @@ footer {
 
 <section class="hero">
   <div class="container hero-grid">
+    <!-- Left Side: Text Content -->
     <div class="hero-content" data-aos="fade-right" data-aos-duration="1000">
-<p style="font-size: 1.25rem; color: var(--text-main); font-weight: 500; margin-bottom: 1rem;">
+      <p style="font-size: 1.25rem; color: var(--text-main); font-weight: 500; margin-bottom: 1rem;">
         Hi, I'm
       </p>
       <h1 style="font-size: clamp(3rem, 6vw, 5rem); background: linear-gradient(to right, #12b8a6, #5eead4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem;">
@@ -364,18 +365,28 @@ footer {
         Undergraduate in Applied Data Science Communication. Bridging the gap between financial literacy and modern analytics. I specialize in turning raw numbers into clear, data-driven narratives that lead to smarter business decisions.
       </p>
       
-<div style="display: flex; gap: 1rem;">
-  <a href="#about" class="btn btn-primary">Get to Know Me</a>
-  
-  <!-- Point to the file within your project folder -->
-  <a href="assets/Shainiyas_new_CV.pdf" download="Mohommed_Shainiya_CV" class="btn btn-outline">
-    Download My CV
-  </a>         
-</div>
-    
-<div class="hero-image-wrapper" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200" style="display: flex; justify-content: flex-end; align-items: center;">
-    <img src="https://raw.githubusercontent.com/Shyy-04/portfolio/main/New%20image.jpeg" alt="Mohommed Shainiya" style="max-width: 100%; height: auto; border-radius: 15px;">
-</div>
+      <div style="display: flex; gap: 1rem;">
+        <a href="#about" class="btn btn-primary">Get to Know Me</a>
+        <a href="assets/Shainiyas_new_CV.pdf" download="Mohommed_Shainiya_CV" class="btn btn-outline">
+          Download My CV
+        </a>          
+      </div>
+    </div>
+
+    <!-- Right Side: Profile Image -->
+    <div class="hero-image-wrapper" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+      <img src="https://raw.githubusercontent.com/Shyy-04/portfolio/main/New%20image.jpeg" alt="Mohommed Shainiya">
+      
+      <!-- Optional: Floating Badge for Professional Touch -->
+      <div class="floating-badge">
+        <div class="badge-icon">📊</div>
+        <div>
+          <div style="font-weight: 800; color: white; font-size: 0.9rem;">Data Scientist</div>
+          <div style="font-size: 0.7rem; color: var(--text-muted);">Finance Expert</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="about" id="about">
